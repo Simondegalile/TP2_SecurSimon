@@ -1,0 +1,55 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             mc:Ignorable="d"
+             x:Class="TP2_SecurSimon.Views.LoginPage"
+             Shell.NavBarIsVisible="False">
+
+        <ContentPage.Content>
+         
+
+
+        <Grid BackgroundColor="LightGray" >
+            <Frame Margin="30,200,30,200" CornerRadius="20" >
+                <StackLayout VerticalOptions="CenterAndExpand" 
+                         HorizontalOptions="CenterAndExpand" 
+                         Spacing="20" 
+                         BackgroundColor="White" 
+                         Padding="20">
+
+                    <Frame CornerRadius="20">
+                        <!-- Logo ou titre de l'application -->
+                        <Label Text="SécureSimon" FontSize="32" FontAttributes="Bold" TextColor="#333333" />
+                    </Frame>
+
+                    <!-- Champ d'entrée pour l'utilisateur -->
+                    <Entry Placeholder="Nom d'utilisateur"
+                       Text="{Binding User, Mode=TwoWay}" 
+                       TextColor="#333333"/>
+
+                    <!-- Champ d'entrée pour le mot de passe -->
+                    <Entry Placeholder="Mot de passe"  
+                       Text="{Binding Password, Mode=TwoWay}"
+                       IsPassword="True"
+                       TextColor="#333333"/>
+
+                    <!-- Bouton de connexion -->
+                    <Button Text="Connexion"
+                        Command="{Binding LoginCommand}" 
+                        BackgroundColor="#007AFF"
+                        TextColor="White"
+                        CornerRadius="8" />
+
+                    <!-- Lien pour mot de passe oublié -->
+                    <Label Text="Mot de passe oublié ?"
+                       TextColor="#007AFF"
+                       FontAttributes="Italic">
+                    </Label>
+                </StackLayout>
+            </Frame>
+        </Grid>
+      
+        </ContentPage.Content>
+    </ContentPage>
