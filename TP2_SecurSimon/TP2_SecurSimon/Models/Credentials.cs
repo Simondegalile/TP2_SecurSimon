@@ -6,7 +6,7 @@ namespace TP2_SecurSimon.Models
 {
     public class Credentials 
     {
-        public int Id { get; set; }
+        public string Id { get; set; }
         public string Password { get; set; }
         public string User { get; set; }
         public string Rating { get; set; }

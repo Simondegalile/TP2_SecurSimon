@@ -3,6 +3,7 @@ using System.Collections.ObjectModel;
 using System.Diagnostics;
 using System.Threading.Tasks;
 using TP2_SecurSimon.Models;
+using TP2_SecurSimon.Services; // Ajout de cette référence
 using TP2_SecurSimon.Views;
 using Xamarin.Forms;
 
@@ -10,35 +11,36 @@ namespace TP2_SecurSimon.ViewModels
 {
     public class ItemsViewModel : BaseViewModel
     {
-        private Item _selectedItem;
+        private Credentials _selectedCredentials;  // Changement de type
+        private Dao_Credentials daoCredentials;    // Instance de Dao_Credentials
 
-        public ObservableCollection<Item> Items { get; }
-        public Command LoadItemsCommand { get; }
-        public Command AddItemCommand { get; }
-        public Command<Item> ItemTapped { get; }
+        public ObservableCollection<Credentials> CredentialsList { get; }  // Changement du nom et du type
+        public Command LoadCredentialsCommand { get; }  // Renommé pour la clarté
+        public Command AddCredentialsCommand { get; }  // Renommé pour la clarté
+        public Command<Credentials> CredentialsTapped { get; }  // Changement du nom et du type
 
         public ItemsViewModel()
         {
             Title = "Browse";
-            Items = new ObservableCollection<Item>();
-            LoadItemsCommand = new Command(async () => await ExecuteLoadItemsCommand());
+            CredentialsList = new ObservableCollection<Credentials>();
+            LoadCredentialsCommand = new Command(async () => await ExecuteLoadCredentialsCommand());
+            CredentialsTapped = new Command<Credentials>(OnCredentialsSelected);
 
-            ItemTapped = new Command<Item>(OnItemSelected);
 
-            AddItemCommand = new Command(OnAddItem);
+            daoCredentials = new Dao_Credentials(); // Initialisation
         }
 
-        async Task ExecuteLoadItemsCommand()
+        async Task ExecuteLoadCredentialsCommand()
         {
             IsBusy = true;
 
             try
             {
-                Items.Clear();
-                var items = await DataStore.GetItemsAsync(true);
-                foreach (var item in items)
+                CredentialsList.Clear();
+                var credentials = daoCredentials.GetAllCredentials();
+                foreach (var cred in credentials)
                 {
-                    Items.Add(item);
+                    CredentialsList.Add(cred);
                 }
             }
             catch (Exception ex)
@@ -54,31 +56,27 @@ namespace TP2_SecurSimon.ViewModels
         public void OnAppearing()
         {
             IsBusy = true;
-            SelectedItem = null;
+            SelectedCredentials = null;  // Changement de nom
         }
 
-        public Item SelectedItem
+        public Credentials SelectedCredentials  // Changement du nom et du type
         {
-            get => _selectedItem;
+            get => _selectedCredentials;
             set
             {
-                SetProperty(ref _selectedItem, value);
-                OnItemSelected(value);
+                SetProperty(ref _selectedCredentials, value);
+                OnCredentialsSelected(value);  // Changement de nom
             }
         }
 
-        private async void OnAddItem(object obj)
+        async void OnCredentialsSelected(Credentials credentials)  // Changement du nom et du type
         {
-            await Shell.Current.GoToAsync(nameof(NewItemPage));
-        }
-
-        async void OnItemSelected(Item item)
-        {
-            if (item == null)
+            if (credentials == null)
                 return;
 
-            // This will push the ItemDetailPage onto the navigation stack
-            await Shell.Current.GoToAsync($"{nameof(ItemDetailPage)}?{nameof(ItemDetailViewModel.ItemId)}={item.Id}");
+            // Mettez à jour avec la logique appropriée si vous avez une page de détails pour Credentials
+            // Par exemple: 
+            // await Shell.Current.GoToAsync($"{nameof(CredentialsDetailPage)}?{nameof(CredentialsDetailViewModel.CredentialsId)}={credentials.Id}");
         }
     }
 }

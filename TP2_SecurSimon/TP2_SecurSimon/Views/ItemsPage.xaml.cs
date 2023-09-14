@@ -21,6 +21,7 @@ namespace TP2_SecurSimon.Views
             InitializeComponent();
 
             BindingContext = _viewModel = new ItemsViewModel();
+            BindingContext = new ItemsViewModel();
         }
 
         protected override void OnAppearing()
@@ -28,5 +29,7 @@ namespace TP2_SecurSimon.Views
             base.OnAppearing();
             _viewModel.OnAppearing();
         }
+
+
     }
 }
