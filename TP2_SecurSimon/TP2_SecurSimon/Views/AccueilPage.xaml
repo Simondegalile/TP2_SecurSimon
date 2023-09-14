@@ -1,0 +1,43 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="TP2_SecurSimon.Views.AccueilPage">
+    <ContentPage.Content>
+        <Grid BackgroundColor="White" >
+
+
+            <Image Source="Resources/drawable/WallpaperAccueil.png" Aspect="AspectFill"/>
+            <Frame Margin="30,200,30,200" CornerRadius="20">
+                <StackLayout VerticalOptions="CenterAndExpand" 
+                     HorizontalOptions="CenterAndExpand" 
+                     Spacing="20" 
+                     BackgroundColor="White" 
+                     Padding="20">
+
+                    
+                    <Frame CornerRadius="20">
+                        <!-- Logo ou titre de l'application -->
+                        <Label Text="SécureSimon" FontSize="32" FontAttributes="Bold" TextColor="#333333" />
+                    </Frame>
+
+                    <!-- Bouton pour se connecter -->
+                    <Button Text="Se connecter"
+                    Command="{Binding ConnectCommand}" 
+                    BackgroundColor="#007AFF"
+                    TextColor="White"
+                    CornerRadius="8" 
+                    Clicked="OnLoginButtonClicked"/>
+
+                    <!-- Bouton pour créer un compte -->
+                    <Button Text="Créer un compte"
+                    Command="{Binding CreateAccountCommand}" 
+                    BackgroundColor="#007AFF"
+                    TextColor="White"
+                    CornerRadius="8"/>
+
+                </StackLayout>
+            </Frame>
+        </Grid>
+    </ContentPage.Content>
+
+</ContentPage>

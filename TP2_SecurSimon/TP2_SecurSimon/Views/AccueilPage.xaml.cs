@@ -10,14 +10,16 @@ using Xamarin.Forms.Xaml;
 namespace TP2_SecurSimon.Views
 {
     [XamlCompilation(XamlCompilationOptions.Compile)]
-    public partial class LoginPage : ContentPage
+    public partial class AccueilPage : ContentPage
     {
-        public LoginPage()
+        public AccueilPage()
         {
             InitializeComponent();
-            this.BindingContext = new LoginViewModel();
+            this.BindingContext = new AccueilPageViewModel();
         }
-
-
+        async void OnLoginButtonClicked(object sender, EventArgs e)
+        {
+            await Navigation.PushAsync(new LoginPage());
+        }
     }
 }
