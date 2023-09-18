@@ -4,6 +4,7 @@ using TP2_SecurSimon.Views;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
+
 namespace TP2_SecurSimon
 {
     public partial class App : Application
@@ -13,6 +14,7 @@ namespace TP2_SecurSimon
         {
             InitializeComponent();
 
+            
             DependencyService.Register<MockDataStore>();
             MainPage = new AppShell();
         }

@@ -12,8 +12,10 @@ namespace TP2_SecurSimon.ViewModels
         public string User { get; set; }
         public string Password { get; set; }
 
+
         public string Password_connexin = "1234";
         public string User_connexion = "test";
+
 
         public Command LoginCommand { get; }
 

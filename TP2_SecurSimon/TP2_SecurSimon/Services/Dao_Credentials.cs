@@ -13,12 +13,12 @@ namespace TP2_SecurSimon.Services
 
             credentialsList = new List<Credentials>()
             {
-                new Credentials { Id = Guid.NewGuid().ToString(), Password = "First item", User="This is an item description." },
-                new Credentials { Id = Guid.NewGuid().ToString(), Password = "Second item", User="This is an item description." },
-                new Credentials { Id = Guid.NewGuid().ToString(), Password = "Third item", User="This is an item description." },
-                new Credentials { Id = Guid.NewGuid().ToString(), Password = "Fourth item", User="This is an item description." },
-                new Credentials { Id = Guid.NewGuid().ToString(), Password = "Fifth item", User="This is an item description." },
-                new Credentials { Id = Guid.NewGuid().ToString(), Password = "Sixth item", User="This is an item description." }
+                new Credentials { Id = Guid.NewGuid().ToString(), Website = "blabla item", User="This is an item description." },
+                new Credentials { Id = Guid.NewGuid().ToString(), Website = "Second item", User="This is an item description." },
+                new Credentials { Id = Guid.NewGuid().ToString(), Website = "Third item", User="This is an item description." },
+                new Credentials { Id = Guid.NewGuid().ToString(), Website = "Fourth item", User="This is an item description." },
+                new Credentials { Id = Guid.NewGuid().ToString(), Website = "Fifth item", User="This is an item description." },
+                new Credentials { Id = Guid.NewGuid().ToString(), Website = "Sixth item", User="This is an item description." }
             };
         }
 
@@ -27,5 +27,13 @@ namespace TP2_SecurSimon.Services
         {
             return credentialsList;
         }
+
+
+        public void AddCredential(Credentials credential)
+        {
+            credentialsList.Add(credential);
+        }
+
+
     }
 }

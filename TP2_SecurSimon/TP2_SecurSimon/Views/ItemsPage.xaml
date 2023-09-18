@@ -14,11 +14,11 @@
             <CollectionView.ItemTemplate>
                 <DataTemplate>
                     <StackLayout Padding="10" x:DataType="model:Credentials">
-                        <Label Text="{Binding User}" 
+                        <Label Text="{Binding Website}" 
                             LineBreakMode="NoWrap" 
                             Style="{DynamicResource ListItemTextStyle}" 
                             FontSize="16" />
-                        <Label Text="{Binding Password}" 
+                        <Label Text="{Binding User}" 
                             LineBreakMode="NoWrap"
                             Style="{DynamicResource ListItemDetailTextStyle}"
                             FontSize="13" />
@@ -34,4 +34,7 @@
             </CollectionView.ItemTemplate>
         </CollectionView>
     </RefreshView>
+    <ContentPage.ToolbarItems>
+        <ToolbarItem Text="Add" Clicked="OnAddItemClicked" />
+    </ContentPage.ToolbarItems>
 </ContentPage>

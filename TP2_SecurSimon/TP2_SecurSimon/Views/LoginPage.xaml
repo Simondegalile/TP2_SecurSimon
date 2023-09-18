@@ -9,8 +9,6 @@
 
         <ContentPage.Content>
          
-
-
         <Grid BackgroundColor="LightGray" >
             <Image Source="Resource/drawable/WallpaperLogin.png" Aspect="AspectFill"/>
             <Frame Margin="30,200,30,200" CornerRadius="20" >
