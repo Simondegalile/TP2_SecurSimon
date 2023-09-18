@@ -6,6 +6,7 @@ using TP2_SecurSimon.Models;
 using TP2_SecurSimon.Services; // Ajout de cette référence
 using TP2_SecurSimon.Views;
 using Xamarin.Forms;
+using Rg.Plugins.Popup.Extensions;
 
 namespace TP2_SecurSimon.ViewModels
 {
@@ -29,7 +30,7 @@ namespace TP2_SecurSimon.ViewModels
 
             daoCredentials = new Dao_Credentials(); // Initialisation
         }
-
+        
         async Task ExecuteLoadCredentialsCommand()
         {
             IsBusy = true;

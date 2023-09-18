@@ -35,6 +35,6 @@
         </CollectionView>
     </RefreshView>
     <ContentPage.ToolbarItems>
-        <ToolbarItem Text="Add" Clicked="OnAddItemClicked" />
+        <ToolbarItem Text="Add" Clicked="OnAddItemClicked"/>
     </ContentPage.ToolbarItems>
 </ContentPage>

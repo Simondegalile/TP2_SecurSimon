@@ -11,6 +11,7 @@ using Rg.Plugins.Popup.Services;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 using TP2_SecurSimon.Services;
+using Rg.Plugins.Popup.Extensions;
 
 namespace TP2_SecurSimon.Views
 {
@@ -34,10 +35,7 @@ namespace TP2_SecurSimon.Views
         }
         private async void OnAddItemClicked(object sender, EventArgs e)
         {
-            //instance de classe 
-            var popup = new AddCredentialPopup(_daoCredentials);
-            //ajout de la fenetre de test "popup" à la pile de fenetre contextuelle gere par PopupNavigation
-            await PopupNavigation.Instance.PushAsync(popup);
+            await Navigation.PushPopupAsync(new AddCredentialPopup(_daoCredentials));
         }
 
 
