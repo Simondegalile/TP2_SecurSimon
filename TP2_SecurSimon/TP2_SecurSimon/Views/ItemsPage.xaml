@@ -1,37 +1,36 @@
-﻿<?xml version="1.0" encoding="utf-8" ?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="TP2_SecurSimon.Views.ItemsPage"
              Title="{Binding Title}"
-             xmlns:local="clr-namespace:TP2_SecurSimon.ViewModels"  
-             xmlns:model="clr-namespace:TP2_SecurSimon.Models"  
+             xmlns:local="clr-namespace:TP2_SecurSimon.ViewModels"
+             xmlns:model="clr-namespace:TP2_SecurSimon.Models"
              x:Name="BrowseItemsPage">
 
     <RefreshView x:DataType="local:ItemsViewModel" Command="{Binding LoadCredentialsCommand}" IsRefreshing="{Binding IsBusy, Mode=TwoWay}">
-        <CollectionView x:Name="ItemsListView"
+       <CollectionView x:Name="ItemsListView"
                 ItemsSource="{Binding CredentialsList}"
-                SelectionMode="None">
-            <CollectionView.ItemTemplate>
-                <DataTemplate>
-                    <StackLayout Padding="10" x:DataType="model:Credentials">
-                        <Label Text="{Binding Website}" 
-                            LineBreakMode="NoWrap" 
-                            Style="{DynamicResource ListItemTextStyle}" 
-                            FontSize="16" />
-                        <Label Text="{Binding User}" 
-                            LineBreakMode="NoWrap"
-                            Style="{DynamicResource ListItemDetailTextStyle}"
-                            FontSize="13" />
-                        <StackLayout.GestureRecognizers>
-                            <TapGestureRecognizer 
-                                NumberOfTapsRequired="1"
-                                Command="{Binding Source={RelativeSource AncestorType={x:Type local:ItemsViewModel}}, Path=ItemTapped}"		
-                                CommandParameter="{Binding .}">
-                            </TapGestureRecognizer>
-                        </StackLayout.GestureRecognizers>
-                    </StackLayout>
-                </DataTemplate>
-            </CollectionView.ItemTemplate>
+                SelectionMode="None"
+                Margin="10"
+                BackgroundColor="White"> <!-- Set the background color of the CollectionView to white -->
+    <CollectionView.ItemTemplate>
+        <DataTemplate>
+            <Frame HorizontalOptions="Center" VerticalOptions="Center" Padding="20" BackgroundColor="#007AFF" CornerRadius="50" Margin="10"> <!-- Add margin to create space between frames -->
+                <StackLayout Spacing="5">
+                    <Image Source="icon_about.png"/>
+                    <Label Text="WebSite" FontSize="16" FontAttributes="Bold" TextColor="White" />
+                    <Label Text="{Binding Website, Mode=TwoWay}" FontSize="18" TextColor="White" />
+                    <Label Text="User" FontSize="16" FontAttributes="Bold" TextColor="White" />
+                    <Label Text="{Binding User, Mode=TwoWay}" FontSize="18" TextColor="White" />
+                </StackLayout>
+            </Frame>
+        </DataTemplate>
+    </CollectionView.ItemTemplate>
+            <CollectionView.GestureRecognizers>
+                <TapGestureRecognizer
+                    Command="{Binding Source={RelativeSource AncestorType={x:Type local:ItemsViewModel}}, Path=ItemTappedCommand}"
+                    CommandParameter="{Binding .}" />
+            </CollectionView.GestureRecognizers>
         </CollectionView>
     </RefreshView>
     <ContentPage.ToolbarItems>

@@ -25,22 +25,27 @@ namespace TP2_SecurSimon.Views
 
         public void OnAddClicked(object sender, EventArgs e)
         {
-            //je verifie que ce soit pas null ou vide
-            if (!string.IsNullOrEmpty(WebsiteEntry.Text) && !string.IsNullOrEmpty(UserEntry.Text))
+            if (!string.IsNullOrEmpty(WebsiteEntry.Text) &&
+                !string.IsNullOrEmpty(UserEntry.Text) &&
+                !string.IsNullOrEmpty(PasswordEntry.Text)) // Ajout de cette condition
             {
-                //nouvelle instance de classe 
                 var credential = new TP2_SecurSimon.Models.Credentials
                 {
-                    //cree un ID unique global aleatoire 
                     Id = Guid.NewGuid().ToString(),
                     Website = WebsiteEntry.Text,
-                    User = UserEntry.Text
+                    User = UserEntry.Text,
+                    Password = PasswordEntry.Text  // Sauvegardez le mot de passe ici
                 };
 
                 _daoCredentials.AddCredential(credential);
                 PopupNavigation.Instance.PopAsync(true);
             }
         }
+        public void OnCancelClicked(object sender, EventArgs e)
+        {
+            PopupNavigation.Instance.PopAsync(true);
+        }
+
     }
 
 }

@@ -14,6 +14,8 @@ namespace TP2_SecurSimon.ViewModels
         private string description;
         public string Id { get; set; }
 
+
+
         public string Text
         {
             get => text;

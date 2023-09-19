@@ -37,7 +37,5 @@ namespace TP2_SecurSimon.Views
         {
             await Navigation.PushPopupAsync(new AddCredentialPopup(_daoCredentials));
         }
-
-
     }
 }

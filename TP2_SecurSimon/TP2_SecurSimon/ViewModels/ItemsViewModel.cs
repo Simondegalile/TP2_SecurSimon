@@ -15,6 +15,9 @@ namespace TP2_SecurSimon.ViewModels
         private Credentials _selectedCredentials;  // Changement de type
         private Dao_Credentials daoCredentials;    // Instance de Dao_Credentials
 
+        public string Website { get; set; }
+        public string User { get; set; }
+
         public ObservableCollection<Credentials> CredentialsList { get; }  // Changement du nom et du type
         public Command LoadCredentialsCommand { get; }  // Renommé pour la clarté
         public Command AddCredentialsCommand { get; }  // Renommé pour la clarté
