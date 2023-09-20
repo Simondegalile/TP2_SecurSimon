@@ -16,8 +16,7 @@ namespace TP2_SecurSimon.Views
         {
             InitializeComponent();
             this.BindingContext = new LoginViewModel();
+
         }
-
-
     }
 }
