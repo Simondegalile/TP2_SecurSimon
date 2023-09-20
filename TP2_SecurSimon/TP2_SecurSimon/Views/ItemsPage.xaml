@@ -1,5 +1,4 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
-<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+﻿<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="TP2_SecurSimon.Views.ItemsPage"
              Title="{Binding Title}"
@@ -8,31 +7,43 @@
              x:Name="BrowseItemsPage">
 
     <RefreshView x:DataType="local:ItemsViewModel" Command="{Binding LoadCredentialsCommand}" IsRefreshing="{Binding IsBusy, Mode=TwoWay}">
-       <CollectionView x:Name="ItemsListView"
-                ItemsSource="{Binding CredentialsList}"
-                SelectionMode="None"
-                Margin="10"
-                BackgroundColor="White"> <!-- Set the background color of the CollectionView to white -->
-    <CollectionView.ItemTemplate>
-        <DataTemplate>
-            <Frame HorizontalOptions="Center" VerticalOptions="Center" Padding="20" BackgroundColor="#007AFF" CornerRadius="50" Margin="10"> <!-- Add margin to create space between frames -->
-                <StackLayout Spacing="5">
-                    <Image Source="icon_about.png"/>
-                    <Label Text="WebSite" FontSize="16" FontAttributes="Bold" TextColor="White" />
-                    <Label Text="{Binding Website, Mode=TwoWay}" FontSize="18" TextColor="White" />
-                    <Label Text="User" FontSize="16" FontAttributes="Bold" TextColor="White" />
-                    <Label Text="{Binding User, Mode=TwoWay}" FontSize="18" TextColor="White" />
-                </StackLayout>
-            </Frame>
-        </DataTemplate>
-    </CollectionView.ItemTemplate>
-            <CollectionView.GestureRecognizers>
-                <TapGestureRecognizer
-                    Command="{Binding Source={RelativeSource AncestorType={x:Type local:ItemsViewModel}}, Path=ItemTappedCommand}"
-                    CommandParameter="{Binding .}" />
-            </CollectionView.GestureRecognizers>
-        </CollectionView>
+        <ListView x:Name="ItemsListView"
+                  ItemsSource="{Binding CredentialsList}"
+                  Margin="15"
+                  BackgroundColor="White"
+                  HasUnevenRows="True">
+            <ListView.ItemTemplate>
+                <DataTemplate>
+                    <ViewCell>
+                        <Frame HorizontalOptions="Center" VerticalOptions="Center"  Padding="20" BackgroundColor="#007AFF" CornerRadius="50" Margin="5,10">
+                            <StackLayout Spacing="5" Orientation="Vertical" x:DataType="model:Credentials" HeightRequest="100" WidthRequest="300">
+                                <!--Tirtre-->
+                                <Label Text="Instagrame" TextColor="White"/>
+                                <!--Website-->
+                                <StackLayout Orientation="Horizontal" >
+                                    <Image Source="icon_Website.png" WidthRequest="20" HeightRequest="20"/>
+                                                             
+                                    <Label Text="{Binding Website}" FontSize="18" TextColor="White" />
+                                </StackLayout>
+                                <!--User-->
+                                <StackLayout Orientation="Horizontal">
+                                    <Image Source="icon_User.png" WidthRequest="20" HeightRequest="20"/>
+
+                                    <Label Text="{Binding User}" FontSize="18" TextColor="White" />
+                                </StackLayout>
+                                 <!--Password-->
+                                <StackLayout Orientation="Horizontal">
+                                    <Image Source="icon_Password.png" WidthRequest="20" HeightRequest="20"/>
+                                    <Label Text="{Binding Password}" FontSize="18" TextColor="White" />
+                                </StackLayout>
+                            </StackLayout>
+                        </Frame>
+                    </ViewCell>
+                </DataTemplate>
+            </ListView.ItemTemplate>
+        </ListView>
     </RefreshView>
+
     <ContentPage.ToolbarItems>
         <ToolbarItem Text="Add" Clicked="OnAddItemClicked"/>
     </ContentPage.ToolbarItems>

@@ -12,16 +12,23 @@ namespace TP2_SecurSimon.ViewModels
 {
     public class ItemsViewModel : BaseViewModel
     {
-        private Credentials _selectedCredentials;  // Changement de type
-        private Dao_Credentials daoCredentials;    // Instance de Dao_Credentials
+
 
         public string Website { get; set; }
         public string User { get; set; }
+        public string Password { get; set; }
+
+        private Credentials _selectedCredentials;  // Changement de type
+        private Dao_Credentials daoCredentials;    // Instance de Dao_Credentials
 
         public ObservableCollection<Credentials> CredentialsList { get; }  // Changement du nom et du type
         public Command LoadCredentialsCommand { get; }  // Renommé pour la clarté
         public Command AddCredentialsCommand { get; }  // Renommé pour la clarté
         public Command<Credentials> CredentialsTapped { get; }  // Changement du nom et du type
+
+
+
+
 
         public ItemsViewModel()
         {

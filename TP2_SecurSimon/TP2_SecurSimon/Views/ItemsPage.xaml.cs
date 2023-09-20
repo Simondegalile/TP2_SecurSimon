@@ -20,13 +20,15 @@ namespace TP2_SecurSimon.Views
         Dao_Credentials _daoCredentials = new Dao_Credentials();
         ItemsViewModel _viewModel;
 
+
         public ItemsPage()
         {
             InitializeComponent();
 
             BindingContext = _viewModel = new ItemsViewModel();
-            BindingContext = new ItemsViewModel();
         }
+
+
 
         protected override void OnAppearing()
         {
