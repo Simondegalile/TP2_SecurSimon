@@ -1,6 +1,7 @@
 ﻿using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.IO;
 using System.Linq;
 using System.Net.Http;
@@ -12,10 +13,11 @@ namespace TP2_SecurSimon.Models
     public class UserDao
     {
         private string _filePath;
-        HttpClient _client;
+        HttpClient _client ;
         public UserDao(string filePath)
         {
             _filePath = filePath;
+            _client = new HttpClient();        
         }
 
         private List<User> ReadUsers()
@@ -38,36 +40,63 @@ namespace TP2_SecurSimon.Models
 
 
 
-
-
-        public async Task<List<User>> GetClassesAsync(bool forceRefresh = false)
+        public async Task<List<User>> GetAllUser()
         {
-            Uri uri = new Uri(string.Format("http://172.31.254.107:8080" + "/getAlluser", string.Empty));
+            string url = "http://10.0.2.2:8080/getAlluser";
+
+            Uri uri = new Uri(url);
             try
             {
                 HttpResponseMessage response = await _client.GetAsync(uri).ConfigureAwait(false);
                 if (response.IsSuccessStatusCode)
                 {
                     var content = await response.Content.ReadAsStringAsync();
-                    var User = JsonConvert.DeserializeObject<List<User>>(content);
-                    return await Task.FromResult(User);
+                    var user = JsonConvert.DeserializeObject<List<User>>(content);
+
+
+                    return (user);
                 }
-                else
-                {
-                }
+                return (null);
             }
             catch (Exception ex)
-            {
-                var msg = ex.Message;
+            {              
+                return (null);
             }
-            return null;
         }
+
+
+
+
+
+        //public async Task<List<User>> GetClassesAsync(bool forceRefresh = false)
+        //{
+        //    string url = "http://10.0.2.2:8080/getAlluser";
+
+        //    try
+        //    {
+        //        HttpResponseMessage response = await _client.GetAsync(url).ConfigureAwait(false);
+        //        if (response.IsSuccessStatusCode)
+        //        {
+        //            var content = await response.Content.ReadAsStringAsync();
+        //            var User = JsonConvert.DeserializeObject<List<User>>(content);
+        //            return await Task.FromResult(User);
+        //        }
+        //        else
+        //        {
+        //        }
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        var msg = ex.Message;
+        //    }
+        //    return null;
+        //}
 
 
 
         public async Task<User> GetUserByEmailFromApi(string email)
         {
-            List<User> allUsers = await GetClassesAsync();
+            List<User> allUsers = await GetAllUser();
             if (allUsers == null) return null;
             return allUsers.FirstOrDefault(u => u.email == email);
         }
