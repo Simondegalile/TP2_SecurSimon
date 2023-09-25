@@ -35,9 +35,10 @@ namespace TP2_SecurSimon.ViewModels
             // Création de la commande de connexion qui appelle la méthode OnLoginClicked
             LoginCommand = new Command(OnLoginClicked);
         }
-
-
         // Méthode exécutée lorsque l'utilisateur appuie sur le bouton de connexion
+
+
+
         private async void OnLoginClicked(object obj)
         {
             // Récupération du nom d'utilisateur et du mot de passe entrés par l'utilisateur
@@ -45,7 +46,7 @@ namespace TP2_SecurSimon.ViewModels
             string EncryptedPasswordConnexion = Cryptage.Encrypt(Password); // Encrypt user's entered password
 
             // Recherche d'un utilisateur dans la base de données en fonction de l'adresse e-mail entrée
-            User user = _userDao.GetUserByEmail(UserConnexion);
+            User user = await _userDao.GetUserByEmailFromApi(UserConnexion);
 
             if (user != null)
             {

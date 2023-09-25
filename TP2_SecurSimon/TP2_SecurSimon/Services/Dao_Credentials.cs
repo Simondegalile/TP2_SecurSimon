@@ -9,7 +9,7 @@ namespace TP2_SecurSimon.Services
 {
     public class Dao_Credentials
     {
-        HttpClient _client;
+
         public List<Credentials> credentialsList;
         public Dao_Credentials() 
         {
@@ -24,28 +24,7 @@ namespace TP2_SecurSimon.Services
             };
         }
 
-        public async Task<List<Credentials>> GetClassesAsync(bool forceRefresh = false)
-        {
-            Uri uri = new Uri(string.Format("http://172.31.254.107:8080" + "/getAlluser", string.Empty));
-            try
-            {
-                HttpResponseMessage response = await _client.GetAsync(uri).ConfigureAwait(false);
-                if (response.IsSuccessStatusCode)
-                {
-                    var content = await response.Content.ReadAsStringAsync();
-                    var Credentials = JsonConvert.DeserializeObject<List<Credentials>>(content);
-                    return await Task.FromResult(Credentials);
-                }
-                else
-                {
-                }
-            }
-            catch (Exception ex)
-            {
-                var msg = ex.Message;
-            }
-            return null;
-        }
+
 
         // Pour obtenir tous les credentials
         public List<Credentials> GetAllCredentials()
