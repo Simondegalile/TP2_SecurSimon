@@ -9,12 +9,10 @@ namespace TP2_SecurSimon.Models
     public class UserDao
     {
         private string _filePath;
-
         public UserDao(string filePath)
         {
             _filePath = filePath;
         }
-
         private List<User> ReadUsers()
         {
             if (!File.Exists(_filePath))
@@ -26,8 +24,6 @@ namespace TP2_SecurSimon.Models
             var users = JsonConvert.DeserializeObject<UsersWrapper>(jsonData).utilisateurs;
             return users ?? new List<User>();
         }
-
-        
         public string GetEmail(int userId)
         {
             var users = ReadUsers();
@@ -43,10 +39,7 @@ namespace TP2_SecurSimon.Models
             var users = ReadUsers();
             return users.FirstOrDefault(u => u.email == email);
         }
-
-
     }
-
     class UsersWrapper
     {
         public List<User> utilisateurs { get; set; }

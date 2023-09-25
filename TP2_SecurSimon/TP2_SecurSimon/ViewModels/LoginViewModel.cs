@@ -50,7 +50,7 @@ namespace TP2_SecurSimon.ViewModels
             if (user != null)
             {
                 // Compare encrypted passwords instead of plain text
-                if (EncryptedPasswordConnexion == user.password)
+                if (EncryptedPasswordConnexion == user.Cryptepassword)
                 {
                     await Shell.Current.GoToAsync($"//{nameof(AboutPage)}");
                 }

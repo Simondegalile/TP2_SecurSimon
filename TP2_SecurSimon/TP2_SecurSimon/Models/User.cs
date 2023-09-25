@@ -9,6 +9,7 @@ namespace TP2_SecurSimon.Models
         public int id { get; set; }
         public string user { get; set; }
         public string email { get; set; }
-        public string password { get; set; }
+        public string Cryptepassword { get; set; }
+        public string DateCreatUser { get; set; }
     }
 }

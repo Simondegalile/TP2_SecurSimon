@@ -16,6 +16,9 @@
                 <DataTemplate>
                     <ViewCell>
                         <Frame HorizontalOptions="Center" VerticalOptions="Center"  Padding="20" BackgroundColor="#007AFF" CornerRadius="50" Margin="5,10">
+                            <Frame.GestureRecognizers>
+                                <TapGestureRecognizer Tapped="OnFrameTapped"/>
+                            </Frame.GestureRecognizers>
                             <StackLayout Spacing="5" Orientation="Vertical" x:DataType="model:Credentials" HeightRequest="100" WidthRequest="300">
                                 <!--Tirtre-->
                                 <Label Text="Instagrame" TextColor="White"/>

@@ -27,9 +27,6 @@ namespace TP2_SecurSimon.Views
 
             BindingContext = _viewModel = new ItemsViewModel();
         }
-
-
-
         protected override void OnAppearing()
         {
             base.OnAppearing();
@@ -37,7 +34,13 @@ namespace TP2_SecurSimon.Views
         }
         private async void OnAddItemClicked(object sender, EventArgs e)
         {
-            await Navigation.PushPopupAsync(new AddCredentialPopup(_daoCredentials));
+            await PopupNavigation.Instance.PushAsync(new AddCredentialPopup(_daoCredentials));
         }
+        private async void OnFrameTapped(object sender, EventArgs e)
+        {
+            var daoCredentials = new Dao_Credentials();
+            await PopupNavigation.Instance.PushAsync(new AddCredentialPopup(daoCredentials));
+        }
+
     }
 }

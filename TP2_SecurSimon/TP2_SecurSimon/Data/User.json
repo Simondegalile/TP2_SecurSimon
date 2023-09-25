@@ -4,19 +4,19 @@
       "id": 1,
       "user": "John",
       "email": "john.doe@example.com",
-      "password": "1234" 
+      "DateCreatPassword": "1234"
     },
     {
       "id": 2,
       "user": "Jane",
       "email": "jane.smith@example.com",
-      "password": "1234" 
+      "DateCreatPassword": "1234"
     },
     {
       "id": 3,
       "user": "Alice",
       "email": "alice.johnson@example.com",
-      "password": "1234" 
+      "DateCreatPassword": "1234"
     }
   ]
 }

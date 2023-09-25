@@ -5,10 +5,11 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using TP2_SecurSimon.Services; // Assurez-vous que le chemin est correct
+using TP2_SecurSimon.Services; 
 
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
+using TP2_SecurSimon.ViewModels;
 
 namespace TP2_SecurSimon.Views
 {
@@ -16,12 +17,26 @@ namespace TP2_SecurSimon.Views
     public partial class AddCredentialPopup : Rg.Plugins.Popup.Pages.PopupPage
     {
         private Dao_Credentials _daoCredentials;
+        private ItemsViewModel _viewModel;
 
         public AddCredentialPopup(Dao_Credentials daoCredentials)
         {
             InitializeComponent();
             _daoCredentials = daoCredentials;
+
         }
+        public AddCredentialPopup(Dao_Credentials daoCredentials, ItemsViewModel viewModel)
+        {
+            InitializeComponent();
+            _daoCredentials = daoCredentials;
+            _viewModel = viewModel; // store the passed ViewModel.
+        }
+
+        private async void OnAddItemClicked(object sender, EventArgs e)
+        {
+            await PopupNavigation.Instance.PushAsync(new AddCredentialPopup(_daoCredentials, _viewModel));
+        }
+
 
         public void OnAddClicked(object sender, EventArgs e)
         {
@@ -31,7 +46,7 @@ namespace TP2_SecurSimon.Views
             {
                 var credential = new TP2_SecurSimon.Models.Credentials
                 {
-                    Id = Guid.NewGuid().ToString(),
+                    //Id = Guid.NewGuid().ToString(),
                     Website = WebsiteEntry.Text,
                     User = UserEntry.Text,
                     Password = PasswordEntry.Text  // Sauvegardez le mot de passe ici
@@ -45,6 +60,7 @@ namespace TP2_SecurSimon.Views
         {
             PopupNavigation.Instance.PopAsync(true);
         }
+
 
     }
 

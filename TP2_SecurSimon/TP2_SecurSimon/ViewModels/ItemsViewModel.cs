@@ -7,6 +7,7 @@ using TP2_SecurSimon.Services; // Ajout de cette référence
 using TP2_SecurSimon.Views;
 using Xamarin.Forms;
 using Rg.Plugins.Popup.Extensions;
+using Rg.Plugins.Popup.Services;
 
 namespace TP2_SecurSimon.ViewModels
 {
@@ -89,5 +90,23 @@ namespace TP2_SecurSimon.ViewModels
             // Par exemple: 
             // await Shell.Current.GoToAsync($"{nameof(CredentialsDetailPage)}?{nameof(CredentialsDetailViewModel.CredentialsId)}={credentials.Id}");
         }
+        public void OnAddClicked(object sender, EventArgs e)
+        {
+            if (!string.IsNullOrEmpty(Website) && !string.IsNullOrEmpty(User) && !string.IsNullOrEmpty(Password))
+            {
+                var credential = new TP2_SecurSimon.Models.Credentials
+                {
+                    Website = Website,
+                    User = User,
+                    Password = Password
+                };
+
+                daoCredentials.AddCredential(credential); // Corrected from _daoCredentials
+                CredentialsList.Add(credential);  // Corrected from _viewModel.CredentialsList
+                PopupNavigation.Instance.PopAsync(true);
+            }
+        }
+
+
     }
 }
