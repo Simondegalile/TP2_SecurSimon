@@ -29,19 +29,11 @@ namespace TP2_SecurSimon.ViewModels
             CreateUserCommand = new Command(async () => await OnCreateUserClicked());
         }
 
-
-
-
-
-
-
-
-
         private async Task OnCreateUserClicked()
         {
             var newUser = new User
             {
-                name = Name,
+                user = Name,
                 email = Email,
                 Cryptepassword = Cryptage.Encrypt(Password) // Encrypt user's entered password
             };

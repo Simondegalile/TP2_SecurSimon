@@ -25,17 +25,10 @@
                            TextColor="#333333"
                            Keyboard="Email"/>
 
-                    <!-- Champ d'entrée pour le mot de passe -->
-                    <Entry Placeholder="Mot de passe"  
-                           Text="{Binding Password, Mode=TwoWay}"
-                           IsPassword="True"
-                           TextColor="#333333"/>
-
 
                     <!-- Champ d'entrée pour le mot de passe -->
                     <Entry Placeholder="Name"  
                            Text="{Binding Name, Mode=TwoWay}"
-                           IsPassword="True"
                            TextColor="#333333"/>
 
 

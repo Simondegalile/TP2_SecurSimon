@@ -51,8 +51,6 @@ namespace TP2_SecurSimon.Models
                 {
                     var content = await response.Content.ReadAsStringAsync();
                     var user = JsonConvert.DeserializeObject<List<User>>(content);
-
-
                     return (user);
                 }
                 return (null);
