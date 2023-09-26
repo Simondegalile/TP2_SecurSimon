@@ -19,7 +19,6 @@ namespace TP2_SecurSimon.Models
             _filePath = filePath;
             _client = new HttpClient();        
         }
-
         private List<User> ReadUsers()
         {
             if (!File.Exists(_filePath))
@@ -63,34 +62,29 @@ namespace TP2_SecurSimon.Models
                 return (null);
             }
         }
+        public async Task<bool> AddUser(User user)
+        {
+            string url = "http://10.0.2.2:8080/AddUser";
+            Uri uri = new Uri(url);
 
+            var content = new StringContent(JsonConvert.SerializeObject(user), System.Text.Encoding.UTF8, "application/json");
 
+            try
+            {
+                HttpResponseMessage response = await _client.PostAsync(uri, content).ConfigureAwait(false);
+                if (response.IsSuccessStatusCode)
+                {
+                    return true;
+                }
+                return false;
+            }
+            catch (Exception ex)
+            {
+                
+                return false;
+            }
+        }
 
-
-
-        //public async Task<List<User>> GetClassesAsync(bool forceRefresh = false)
-        //{
-        //    string url = "http://10.0.2.2:8080/getAlluser";
-
-        //    try
-        //    {
-        //        HttpResponseMessage response = await _client.GetAsync(url).ConfigureAwait(false);
-        //        if (response.IsSuccessStatusCode)
-        //        {
-        //            var content = await response.Content.ReadAsStringAsync();
-        //            var User = JsonConvert.DeserializeObject<List<User>>(content);
-        //            return await Task.FromResult(User);
-        //        }
-        //        else
-        //        {
-        //        }
-        //    }
-        //    catch (Exception ex)
-        //    {
-        //        var msg = ex.Message;
-        //    }
-        //    return null;
-        //}
 
 
 

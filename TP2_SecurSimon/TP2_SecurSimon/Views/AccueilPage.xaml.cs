@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.InteropServices.ComTypes;
 using System.Text;
 using System.Threading.Tasks;
 using TP2_SecurSimon.ViewModels;
@@ -20,6 +21,10 @@ namespace TP2_SecurSimon.Views
         async void OnLoginButtonClicked(object sender, EventArgs e)
         {
             await Navigation.PushAsync(new LoginPage());
+        }
+        async void OnCreatUserCliked(object sender, EventArgs e)
+        {
+            await Navigation.PushAsync(new CreatUserPage());
         }
     }
 }

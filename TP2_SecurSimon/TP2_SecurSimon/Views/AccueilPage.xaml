@@ -22,6 +22,7 @@
 
                     <!-- Bouton pour se connecter -->
                     <Button Text="Se connecter"
+                    
                     Command="{Binding ConnectCommand}" 
                     BackgroundColor="#007AFF"
                     TextColor="White"
@@ -33,7 +34,8 @@
                     Command="{Binding CreateAccountCommand}" 
                     BackgroundColor="#007AFF"
                     TextColor="White"
-                    CornerRadius="8"/>
+                    CornerRadius="8"
+                    Clicked="OnCreatUserCliked"/>
 
                 </StackLayout>
             </Frame>
