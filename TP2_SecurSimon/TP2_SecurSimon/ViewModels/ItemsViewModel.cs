@@ -3,18 +3,19 @@ using System.Collections.ObjectModel;
 using System.Diagnostics;
 using System.Threading.Tasks;
 using TP2_SecurSimon.Models;
-using TP2_SecurSimon.Services; // Ajout de cette référence
+using TP2_SecurSimon.Services; 
 using TP2_SecurSimon.Views;
 using Xamarin.Forms;
 using Rg.Plugins.Popup.Extensions;
 using Rg.Plugins.Popup.Services;
+using Newtonsoft.Json;
+using System.Collections.Generic;
+using System.Net.Http;
 
 namespace TP2_SecurSimon.ViewModels
 {
     public class ItemsViewModel : BaseViewModel
     {
-
-
         public string Website { get; set; }
         public string User { get; set; }
         public string Password { get; set; }
@@ -23,12 +24,9 @@ namespace TP2_SecurSimon.ViewModels
         private Dao_Credentials daoCredentials;    // Instance de Dao_Credentials
 
         public ObservableCollection<Credentials> CredentialsList { get; }  // Changement du nom et du type
-        public Command LoadCredentialsCommand { get; }  // Renommé pour la clarté
-        public Command AddCredentialsCommand { get; }  // Renommé pour la clarté
+        public Command LoadCredentialsCommand { get; }  
+        public Command AddCredentialsCommand { get; }  
         public Command<Credentials> CredentialsTapped { get; }  // Changement du nom et du type
-
-
-
 
 
         public ItemsViewModel()
@@ -37,11 +35,9 @@ namespace TP2_SecurSimon.ViewModels
             CredentialsList = new ObservableCollection<Credentials>();
             LoadCredentialsCommand = new Command(async () => await ExecuteLoadCredentialsCommand());
             CredentialsTapped = new Command<Credentials>(OnCredentialsSelected);
-
-
-            daoCredentials = new Dao_Credentials(); // Initialisation
+            daoCredentials = new Dao_Credentials();
         }
-        
+
         async Task ExecuteLoadCredentialsCommand()
         {
             IsBusy = true;
@@ -49,7 +45,7 @@ namespace TP2_SecurSimon.ViewModels
             try
             {
                 CredentialsList.Clear();
-                var credentials = daoCredentials.GetAllCredentials();
+                var credentials = await daoCredentials.GetAllCredentialsAsync();
                 foreach (var cred in credentials)
                 {
                     CredentialsList.Add(cred);
@@ -68,27 +64,23 @@ namespace TP2_SecurSimon.ViewModels
         public void OnAppearing()
         {
             IsBusy = true;
-            SelectedCredentials = null;  // Changement de nom
+            SelectedCredentials = null; 
         }
 
-        public Credentials SelectedCredentials  // Changement du nom et du type
+        public Credentials SelectedCredentials 
         {
             get => _selectedCredentials;
             set
             {
                 SetProperty(ref _selectedCredentials, value);
-                OnCredentialsSelected(value);  // Changement de nom
+                OnCredentialsSelected(value);  
             }
         }
 
-        async void OnCredentialsSelected(Credentials credentials)  // Changement du nom et du type
+        async void OnCredentialsSelected(Credentials credentials) 
         {
             if (credentials == null)
-                return;
-
-            // Mettez à jour avec la logique appropriée si vous avez une page de détails pour Credentials
-            // Par exemple: 
-            // await Shell.Current.GoToAsync($"{nameof(CredentialsDetailPage)}?{nameof(CredentialsDetailViewModel.CredentialsId)}={credentials.Id}");
+            return;
         }
         public void OnAddClicked(object sender, EventArgs e)
         {
@@ -101,12 +93,10 @@ namespace TP2_SecurSimon.ViewModels
                     Password = Password
                 };
 
-                daoCredentials.AddCredential(credential); // Corrected from _daoCredentials
-                CredentialsList.Add(credential);  // Corrected from _viewModel.CredentialsList
+                daoCredentials.AddCredential(credential); 
+                CredentialsList.Add(credential);  
                 PopupNavigation.Instance.PopAsync(true);
             }
         }
-
-
     }
 }

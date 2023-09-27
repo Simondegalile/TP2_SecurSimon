@@ -19,26 +19,34 @@
                             <Frame.GestureRecognizers>
                                 <TapGestureRecognizer Tapped="OnFrameTapped"/>
                             </Frame.GestureRecognizers>
-                            <StackLayout Spacing="5" Orientation="Vertical" x:DataType="model:Credentials" HeightRequest="100" WidthRequest="300">
+                            <StackLayout Spacing="5" Orientation="Vertical" x:DataType="model:Credentials" HeightRequest="150" WidthRequest="300">
                                 <!--Tirtre-->
-                                <Label Text="Instagrame" TextColor="White"/>
+                                <Label Text="Instagrame" TextColor="White" HorizontalTextAlignment="Center"/>
                                 <!--Website-->
                                 <StackLayout Orientation="Horizontal" >
                                     <Image Source="icon_Website.png" WidthRequest="20" HeightRequest="20"/>
-                                                             
                                     <Label Text="{Binding Website}" FontSize="18" TextColor="White" />
                                 </StackLayout>
                                 <!--User-->
                                 <StackLayout Orientation="Horizontal">
                                     <Image Source="icon_User.png" WidthRequest="20" HeightRequest="20"/>
-
                                     <Label Text="{Binding User}" FontSize="18" TextColor="White" />
                                 </StackLayout>
+                          
                                  <!--Password-->
                                 <StackLayout Orientation="Horizontal">
                                     <Image Source="icon_Password.png" WidthRequest="20" HeightRequest="20"/>
                                     <Label Text="{Binding Password}" FontSize="18" TextColor="White" />
                                 </StackLayout>
+                                <!--DELETE-->
+                                <StackLayout>
+                                    <Button Text="Delete" 
+                                    TextColor="White" 
+                                    HeightRequest="50" 
+                                    BackgroundColor="Red"
+                                    CornerRadius="25" />    
+                                </StackLayout>
+
                             </StackLayout>
                         </Frame>
                     </ViewCell>
