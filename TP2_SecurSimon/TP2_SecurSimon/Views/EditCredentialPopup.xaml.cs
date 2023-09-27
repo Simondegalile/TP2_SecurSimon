@@ -1,30 +1,32 @@
 ﻿using System;
+using System.Windows.Input;
 using TP2_SecurSimon.Models;
-using Rg.Plugins.Popup.Pages;
 using Xamarin.Forms;
+using Rg.Plugins.Popup.Pages;
 using Xamarin.Forms.Xaml;
+using Rg.Plugins.Popup.Services;
 
 namespace TP2_SecurSimon.Views
 {
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class EditCredentialPopup : PopupPage
     {
-        public Credentials CurrentCredentials { get; set; }
+       
 
         public EditCredentialPopup(Credentials credentials)
         {
             InitializeComponent();
+            BindingContext = credentials; // Utilisez le paramètre 'credentials' pour la liaison de données
 
-            CurrentCredentials = credentials;
-            BindingContext = CurrentCredentials;
         }
 
         private async void OnEditClicked(object sender, EventArgs e)
         {
-            // Your logic to save the modifications (e.g., update in database) here.
-            // ...
-
-            await Rg.Plugins.Popup.Services.PopupNavigation.Instance.PopAsync();
+           await Rg.Plugins.Popup.Services.PopupNavigation.Instance.PopAsync();
+        }
+        public void OnCancelClicked(object sender, EventArgs e)
+        {
+            PopupNavigation.Instance.PopAsync(true);
         }
     }
 }

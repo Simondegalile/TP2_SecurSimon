@@ -41,7 +41,7 @@ namespace TP2_SecurSimon.Models
 
         public async Task<List<User>> GetAllUser()
         {
-            string url = "http://10.0.2.2:8080/getAlluser";
+            string url = "http://almeida.alwaysdata.net/getAlluser";
 
             Uri uri = new Uri(url);
             try
@@ -62,7 +62,7 @@ namespace TP2_SecurSimon.Models
         }
         public async Task<bool> AddUser(User user)
         {
-            string url = "http://10.0.2.2:8080/AddUser";
+            string url = "http://almeida.alwaysdata.net/AddUser";
             Uri uri = new Uri(url);
 
             var content = new StringContent(JsonConvert.SerializeObject(user), System.Text.Encoding.UTF8, "application/json");

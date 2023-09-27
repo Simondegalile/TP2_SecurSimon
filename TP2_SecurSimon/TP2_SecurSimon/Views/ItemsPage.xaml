@@ -19,7 +19,7 @@
                             <Frame.GestureRecognizers>
                                 <TapGestureRecognizer Tapped="OnFrameTapped"/>
                             </Frame.GestureRecognizers>
-                            <StackLayout Spacing="5" Orientation="Vertical" x:DataType="model:Credentials" HeightRequest="150" WidthRequest="300">
+                            <StackLayout Spacing="5" Orientation="Vertical" x:DataType="model:Credentials" HeightRequest="170" WidthRequest="300">
                                 <!--Tirtre-->
                                 <Label Text="Instagrame" TextColor="White" HorizontalTextAlignment="Center"/>
                                 <!--Website-->
@@ -36,7 +36,7 @@
                                  <!--Password-->
                                 <StackLayout Orientation="Horizontal">
                                     <Image Source="icon_Password.png" WidthRequest="20" HeightRequest="20"/>
-                                    <Label Text="{Binding Password}" FontSize="18" TextColor="White" />
+                                    <Entry Text="{Binding Password}" FontSize="18" TextColor="White" IsPassword="True" IsEnabled="False"/>
                                 </StackLayout>
                                 <!--DELETE-->
                                 <StackLayout>
@@ -52,6 +52,7 @@
                     </ViewCell>
                 </DataTemplate>
             </ListView.ItemTemplate>
+            
         </ListView>
     </RefreshView>
 

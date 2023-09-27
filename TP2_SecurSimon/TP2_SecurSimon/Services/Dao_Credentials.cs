@@ -18,7 +18,7 @@ namespace TP2_SecurSimon.Services
 
         public async Task<List<Credentials>> GetAllCredentialsAsync()
         {
-            string url = "http://10.0.2.2:8080/getAllCredential";
+            string url = "http://almeida.alwaysdata.net/getAllCredential";
 
             Uri uri = new Uri(url);
             using (var client = new HttpClient())

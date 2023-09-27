@@ -36,11 +36,22 @@ namespace TP2_SecurSimon.Views
         {
             await PopupNavigation.Instance.PushAsync(new AddCredentialPopup(_daoCredentials));
         }
+
         private async void OnFrameTapped(object sender, EventArgs e)
         {
-            var daoCredentials = new Dao_Credentials();
-            await PopupNavigation.Instance.PushAsync(new AddCredentialPopup(daoCredentials));
+            var frame = sender as Frame;
+            if (frame != null)
+            {
+                var selectedCredential = frame.BindingContext as Credentials;
+                if (selectedCredential != null)
+                {
+                    await PopupNavigation.Instance.PushAsync(new EditCredentialPopup(selectedCredential));
+                }
+                else
+                {}
+            }
         }
+
 
     }
 }
