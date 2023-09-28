@@ -24,12 +24,12 @@
                     </Frame>
 
                     <!-- Champ d'entrée pour l'utilisateur -->
-                    <Entry Placeholder="Nom d'utilisateur"
+                    <Entry Placeholder="Nom d'utilisateur" PlaceholderColor="Black"
                        Text="{Binding User, Mode=TwoWay}" 
                        TextColor="#333333"/>
 
                     <!-- Champ d'entrée pour le mot de passe -->
-                    <Entry Placeholder="Mot de passe"  
+                    <Entry Placeholder="Mot de passe"   PlaceholderColor="Black"
                        Text="{Binding Password, Mode=TwoWay}"
                        IsPassword="True"
                        TextColor="#333333"/>

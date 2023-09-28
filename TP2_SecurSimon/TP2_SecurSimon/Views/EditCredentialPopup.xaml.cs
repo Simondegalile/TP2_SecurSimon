@@ -17,12 +17,12 @@ namespace TP2_SecurSimon.Views
         {
             InitializeComponent();
             BindingContext = credentials; // Utilisez le paramètre 'credentials' pour la liaison de données
-
         }
 
         private async void OnEditClicked(object sender, EventArgs e)
         {
            await Rg.Plugins.Popup.Services.PopupNavigation.Instance.PopAsync();
+           await PopupNavigation.Instance.PopAsync();
         }
         public void OnCancelClicked(object sender, EventArgs e)
         {

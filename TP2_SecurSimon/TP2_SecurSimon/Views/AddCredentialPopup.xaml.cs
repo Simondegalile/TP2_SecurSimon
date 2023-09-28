@@ -5,7 +5,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using TP2_SecurSimon.Services; 
+using TP2_SecurSimon.Services;
 
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
@@ -23,8 +23,8 @@ namespace TP2_SecurSimon.Views
         {
             InitializeComponent();
             _daoCredentials = daoCredentials;
-
         }
+
         public AddCredentialPopup(Dao_Credentials daoCredentials, ItemsViewModel viewModel)
         {
             InitializeComponent();
@@ -37,31 +37,45 @@ namespace TP2_SecurSimon.Views
             await PopupNavigation.Instance.PushAsync(new AddCredentialPopup(_daoCredentials, _viewModel));
         }
 
-
-        public void OnAddClicked(object sender, EventArgs e)
+        public async void OnAddClicked(object sender, EventArgs e)
         {
             if (!string.IsNullOrEmpty(WebsiteEntry.Text) &&
                 !string.IsNullOrEmpty(UserEntry.Text) &&
-                !string.IsNullOrEmpty(PasswordEntry.Text)) // Ajout de cette condition
+                !string.IsNullOrEmpty(PasswordEntry.Text) &&
+                !string.IsNullOrEmpty(EmailEntry.Text) &&
+                !string.IsNullOrEmpty(CategoryEntry.Text))
             {
                 var credential = new TP2_SecurSimon.Models.Credentials
                 {
-                    //Id = Guid.NewGuid().ToString(),
                     Website = WebsiteEntry.Text,
                     User = UserEntry.Text,
-                    Password = PasswordEntry.Text  // Sauvegardez le mot de passe ici
+                    Password = PasswordEntry.Text,
+                    Rating = GetRating(PasswordEntry.Text),
+                    Email = EmailEntry.Text,
+                    DateCreatPassword = DateTime.Now,
+                    Categorie = CategoryEntry.Text,
+                    IdUser = 1  
                 };
 
-                _daoCredentials.AddCredential(credential);
+                await _daoCredentials.AddCredentialAsync(credential);
                 PopupNavigation.Instance.PopAsync(true);
             }
         }
-        public void OnCancelClicked(object sender, EventArgs e)
+        private async void OnCancelClicked(object sender, EventArgs e)
         {
-            PopupNavigation.Instance.PopAsync(true);
+            // Handle the cancel button click event here.
+            await PopupNavigation.Instance.PopAsync(true);
         }
 
-
+        // Password strength calculator
+        public string GetRating(string password)
+        {
+            if (password.Length < 6)
+                return "Weak";
+            else if (password.Length < 10)
+                return "Medium";
+            else
+                return "Strong";
+        }
     }
-
 }

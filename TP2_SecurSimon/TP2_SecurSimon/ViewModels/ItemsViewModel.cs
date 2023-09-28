@@ -11,6 +11,7 @@ using Rg.Plugins.Popup.Services;
 using Newtonsoft.Json;
 using System.Collections.Generic;
 using System.Net.Http;
+using System.Linq;
 
 namespace TP2_SecurSimon.ViewModels
 {
@@ -22,6 +23,9 @@ namespace TP2_SecurSimon.ViewModels
 
         private Credentials _selectedCredentials;  // Changement de type
         private Dao_Credentials daoCredentials;    // Instance de Dao_Credentials
+        public Command<int> DeleteCommand { get; }
+
+        public Command<Credentials> EditCredentialsCommand { get; }
 
         public ObservableCollection<Credentials> CredentialsList { get; }  // Changement du nom et du type
         public Command LoadCredentialsCommand { get; }  
@@ -35,6 +39,8 @@ namespace TP2_SecurSimon.ViewModels
             CredentialsList = new ObservableCollection<Credentials>();
             LoadCredentialsCommand = new Command(async () => await ExecuteLoadCredentialsCommand());
             CredentialsTapped = new Command<Credentials>(OnCredentialsSelected);
+            EditCredentialsCommand = new Command<Credentials>(OnEditCredentials);
+            DeleteCommand = new Command<int>(async (id) => await OnSupprItem(id));
             daoCredentials = new Dao_Credentials();
         }
 
@@ -60,12 +66,29 @@ namespace TP2_SecurSimon.ViewModels
                 IsBusy = false;
             }
         }
+        private async Task OnSupprItem(int id)
+        {
+            bool isDeleted = await daoCredentials.DeleteCredentialAsync(id);
+            if (isDeleted)
+            {
+                // Perform any logic after successful deletion if needed. For instance, remove the item from the ObservableCollection:
+                var itemToRemove = CredentialsList.FirstOrDefault(i => i.Id == id);
+                if (itemToRemove != null)
+                    CredentialsList.Remove(itemToRemove);
+            }
+        }
 
         public void OnAppearing()
         {
             IsBusy = true;
             SelectedCredentials = null; 
         }
+        async void OnEditCredentials(Credentials credentials)
+        {
+            var editPage = new EditCredentialPopup(credentials);
+            await PopupNavigation.Instance.PushAsync(editPage);
+        }
+
 
         public Credentials SelectedCredentials 
         {

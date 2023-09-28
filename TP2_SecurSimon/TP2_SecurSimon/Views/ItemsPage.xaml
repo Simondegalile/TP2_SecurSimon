@@ -32,8 +32,8 @@
                                     <Image Source="icon_User.png" WidthRequest="20" HeightRequest="20"/>
                                     <Label Text="{Binding User}" FontSize="18" TextColor="White" />
                                 </StackLayout>
-                          
-                                 <!--Password-->
+
+                                <!--Password-->
                                 <StackLayout Orientation="Horizontal">
                                     <Image Source="icon_Password.png" WidthRequest="20" HeightRequest="20"/>
                                     <Entry Text="{Binding Password}" FontSize="18" TextColor="White" IsPassword="True" IsEnabled="False"/>
@@ -41,10 +41,12 @@
                                 <!--DELETE-->
                                 <StackLayout>
                                     <Button Text="Delete" 
-                                    TextColor="White" 
-                                    HeightRequest="50" 
-                                    BackgroundColor="Red"
-                                    CornerRadius="25" />    
+                                        TextColor="White" 
+                                        HeightRequest="50" 
+                                        BackgroundColor="Red"
+                                        CornerRadius="25" 
+                                        Clicked="OnDeleteClicked"/>
+
                                 </StackLayout>
 
                             </StackLayout>
@@ -52,7 +54,7 @@
                     </ViewCell>
                 </DataTemplate>
             </ListView.ItemTemplate>
-            
+
         </ListView>
     </RefreshView>
 

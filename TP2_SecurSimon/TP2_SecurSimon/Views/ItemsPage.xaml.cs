@@ -51,6 +51,23 @@ namespace TP2_SecurSimon.Views
                 {}
             }
         }
+        private async void OnDeleteClicked(object sender, EventArgs e)
+        {
+            var button = sender as Button;
+            if (button != null)
+            {
+                var selectedCredential = button.BindingContext as Credentials;
+                if (selectedCredential != null)
+                {
+                    var confirm = await DisplayAlert("Confirmation", "Voulez-vous vraiment supprimer cette entrée?", "Oui", "Non");
+                    if (confirm)
+                    {
+                        // Use ViewModel's delete command
+                        _viewModel.DeleteCommand.Execute(selectedCredential.Id);
+                    }
+                }
+            }
+        }
 
 
     }

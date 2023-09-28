@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Net.Http;
+using System.Text;
 using System.Threading.Tasks;
 using TP2_SecurSimon.Models;
 
@@ -48,5 +49,30 @@ namespace TP2_SecurSimon.Services
         {
             credentialsList.Add(credential);
         }
+
+        public async Task AddCredentialAsync(Credentials credential)
+        {
+            string url = "http://almeida.alwaysdata.net/AddCredential";
+            Uri uri = new Uri(url);
+            using (var client = new HttpClient())
+            {
+                var content = new StringContent(JsonConvert.SerializeObject(credential), Encoding.UTF8, "application/json");
+                var response = await client.PostAsync(uri, content);
+                if (response.IsSuccessStatusCode)
+                {
+                    // Gérer le succès ici
+                }
+                else
+                {
+                    // Gérer l'erreur ici
+                }
+            }
+        }
+        public async Task<bool> DeleteCredentialAsync(int id)
+        {
+            return await DeleteCredentials(id);
+        }
+
+
     }
 }

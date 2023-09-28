@@ -14,6 +14,7 @@ namespace TP2_SecurSimon.Models
         public string Email{ get; set; }
         public DateTime DateCreatPassword { get; set; }
         public string Categorie { get; set; }
+        public int IdUser { get; set; }
 
     }
 }
