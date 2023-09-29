@@ -11,8 +11,6 @@ namespace TP2_SecurSimon.Views
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class EditCredentialPopup : PopupPage
     {
-       
-
         public EditCredentialPopup(Credentials credentials)
         {
             InitializeComponent();
@@ -21,8 +19,8 @@ namespace TP2_SecurSimon.Views
 
         private async void OnEditClicked(object sender, EventArgs e)
         {
-           await Rg.Plugins.Popup.Services.PopupNavigation.Instance.PopAsync();
-           await PopupNavigation.Instance.PopAsync();
+            await Rg.Plugins.Popup.Services.PopupNavigation.Instance.PopAsync();
+            await PopupNavigation.Instance.PopAsync();
         }
         public void OnCancelClicked(object sender, EventArgs e)
         {
