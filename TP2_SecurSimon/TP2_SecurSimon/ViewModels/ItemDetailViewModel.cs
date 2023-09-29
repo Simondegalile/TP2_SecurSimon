@@ -11,16 +11,14 @@ namespace TP2_SecurSimon.ViewModels
     [QueryProperty(nameof(ItemId), nameof(ItemId))]
     public class ItemDetailViewModel : BaseViewModel
     {
-
         private string itemId;
         private string text;
         private string description;
-        public string Id { get; set; }
+        private readonly Dao_Credentials daoCredentials; // Utilisation de readonly car il est initialisé une seule fois
 
-        private Dao_Credentials daoCredentials;
         public ObservableCollection<Credentials> CredentialsList { get; }
 
-
+        public string Id { get; set; }
 
         public string Text
         {
@@ -36,10 +34,7 @@ namespace TP2_SecurSimon.ViewModels
 
         public string ItemId
         {
-            get
-            {
-                return itemId;
-            }
+            get => itemId;
             set
             {
                 itemId = value;
@@ -47,6 +42,15 @@ namespace TP2_SecurSimon.ViewModels
             }
         }
 
+        // Constructeur pour initialiser les propriétés et charger les données
+        public ItemDetailViewModel()
+        {
+            daoCredentials = new Dao_Credentials();
+            CredentialsList = new ObservableCollection<Credentials>();
+            LoadCredentialsAsync();
+        }
+
+        // Méthode pour charger un élément par son ID
         public async void LoadItemId(string itemId)
         {
             try
@@ -58,22 +62,17 @@ namespace TP2_SecurSimon.ViewModels
             }
             catch (Exception)
             {
-                Debug.WriteLine("Failed to Load Item");
+                Debug.WriteLine("Échec du chargement de l'élément");
             }
         }
-        public ItemDetailViewModel()
-        {
-            daoCredentials = new Dao_Credentials(); // Initialisation de la variable daoCredentials
-            CredentialsList = new ObservableCollection<Credentials>();
-            LoadCredentialsAsync(); // Appel à la méthode pour charger les credentials
-        }
 
+        // Méthode pour charger tous les credentials
         private async Task LoadCredentialsAsync()
         {
             try
             {
                 CredentialsList.Clear();
-                var credentials = await daoCredentials.GetAllCredentialsAsync(); // Utilisation de daoCredentials
+                var credentials = await daoCredentials.GetAllCredentialsAsync();
                 foreach (var cred in credentials)
                 {
                     CredentialsList.Add(cred);
@@ -81,9 +80,8 @@ namespace TP2_SecurSimon.ViewModels
             }
             catch (Exception ex)
             {
-                Debug.WriteLine(ex);
+                Debug.WriteLine($"Erreur lors du chargement des credentials : {ex.Message}");
             }
         }
-
     }
 }
