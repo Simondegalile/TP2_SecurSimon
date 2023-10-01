@@ -1,4 +1,5 @@
-﻿using Newtonsoft.Json;
+﻿
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Net.Http;
@@ -60,7 +61,8 @@ namespace TP2_SecurSimon.Services
             Uri uri = new Uri(url);
             using (var client = new HttpClient())
             {
-                var content = new StringContent(JsonConvert.SerializeObject(credential), Encoding.UTF8, "application/json");
+                var json = JsonConvert.SerializeObject(credential);
+                var content = new StringContent(json, Encoding.UTF8, "application/json");
                 var response = await client.PostAsync(uri, content);
                 if (response.IsSuccessStatusCode)
                 {

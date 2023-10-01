@@ -6,6 +6,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using TP2_SecurSimon.Models;
 using TP2_SecurSimon.Services;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
@@ -53,7 +54,7 @@ namespace TP2_SecurSimon.Views
                 !string.IsNullOrEmpty(CategoryEntry.Text))
             {
                 // Création d'une nouvelle instance de Credentials avec les valeurs saisies
-                var credential = new TP2_SecurSimon.Models.Credentials
+                var credential = new Credentials
                 {
                     Website = WebsiteEntry.Text,
                     User = UserEntry.Text,
@@ -62,11 +63,13 @@ namespace TP2_SecurSimon.Views
                     Email = EmailEntry.Text,
                     DateCreatPassword = DateTime.Now,
                     Categorie = CategoryEntry.Text,
-                    IdUser = 1
+                    IdUser = 7
                 };
 
                 // Ajout de la nouvelle credential à la base de données
                 await _daoCredentials.AddCredentialAsync(credential);
+
+
                 // Fermeture de la popup
                 PopupNavigation.Instance.PopAsync(true);
             }
