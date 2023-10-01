@@ -21,7 +21,7 @@
                             </Frame.GestureRecognizers>
                             <StackLayout Spacing="5" Orientation="Vertical" x:DataType="model:Credentials" HeightRequest="170" WidthRequest="300">
                                 <!--Tirtre-->
-                                <Label Text="Instagrame" TextColor="White" HorizontalTextAlignment="Center"/>
+                                <Label Text="AmStragramme" TextColor="White" HorizontalTextAlignment="Center"/>
                                 <!--Website-->
                                 <StackLayout Orientation="Horizontal" >
                                     <Image Source="icon_Website.png" WidthRequest="20" HeightRequest="20"/>
